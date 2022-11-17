@@ -35,9 +35,7 @@ export class PokemonService {
   }
 
   setData(newPokemon: any) {
-    console.log('nnnnnnnnn', newPokemon)
     this.allPokemon.unshift(newPokemon)
-    console.log('next', this.allPokemon)
   }
 
 
