@@ -1,0 +1,17 @@
+<p>list works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pokemon of data">
+      <th scope="row">{{ pokemon.name }}</th>
+      <th scope="row">{{ pokemon.weight }}</th>
+      <th scope="row">{{ pokemon.type }}</th>
+    </tr>
+  </tbody>
+</table>
