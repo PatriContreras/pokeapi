@@ -29,11 +29,19 @@ export class ListComponent implements OnInit {
             this.data.push(data)
             this.allData = JSON.parse(JSON.stringify(this.data))
             this._pokemonService.setAllPokemons(this.data)
+
           })
       })
-
+      this.filterByType()
     })
 
+  }
 
+  filterByType() {
+    this._pokemonService.$pokemonType.subscribe(type => {
+      console.log(this.data)
+      this.data = this.data.filter(pokemon => pokemon.type === type)
+
+    })
   }
 }

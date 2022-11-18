@@ -11,7 +11,11 @@
 
   <div class="col-6">
     <label class="form-label">Tipo</label>
-    <select class="form-select" formControlName="type">
+    <select
+      class="form-select"
+      formControlName="type"
+      (change)="onChange($event)"
+    >
       <option selected>Selecciona un tipo</option>
       <option *ngFor="let type of types">{{ type }}</option>
     </select>

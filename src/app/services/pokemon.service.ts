@@ -9,7 +9,9 @@ import { environment } from 'src/environments/environment';
 export class PokemonService {
   typeUrl = environment.typeUrl;
   pokemonUrl = environment.pokemonUrl
-  private $pokemonList: BehaviorSubject<any> = new BehaviorSubject({});
+  $pokemonList: BehaviorSubject<any> = new BehaviorSubject({});
+  $pokemonType: BehaviorSubject<any> = new BehaviorSubject({});
+
   allPokemon: any;
 
   constructor(private httpClient: HttpClient) { }
@@ -37,6 +39,8 @@ export class PokemonService {
   setData(newPokemon: any) {
     this.allPokemon.unshift(newPokemon)
   }
-
+  setType(type: string): void {
+    this.$pokemonType.next(type);
+  }
 
 }

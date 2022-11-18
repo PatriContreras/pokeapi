@@ -28,8 +28,11 @@ export class NewFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // this._pokemonService.postNewPokemon(this.pokemonForm.value)
     this._pokemonService.setData(this.pokemonForm.value)
+  }
 
+  onChange($event: any) {
+    console.log($event)
+    this._pokemonService.setType($event.target.value)
   }
 }
