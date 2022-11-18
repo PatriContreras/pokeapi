@@ -3,10 +3,19 @@
   <div class="col-6 form-group">
     <label class="form-label">Nombre</label>
     <input type="text" class="form-control" formControlName="name" />
+    <p *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert">
+      Este campo es obligatorio
+    </p>
   </div>
   <div class="col-6">
     <label class="form-label">Peso</label>
     <input type="text" class="form-control" formControlName="weight" />
+    <p
+      *ngIf="weight?.invalid && (weight?.dirty || weight?.touched)"
+      class="alert"
+    >
+      Este campo debe ser una cifra en kilogramos
+    </p>
   </div>
 
   <div class="col-6">

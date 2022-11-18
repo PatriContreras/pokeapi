@@ -5,6 +5,9 @@ h1 {
 
 form {
   background-color: rgb(240, 236, 236);
+  .alert {
+    color: red;
+  }
   .button-container {
     display: flex;
     flex-direction: row;

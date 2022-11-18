@@ -19,7 +19,6 @@ export class ListComponent implements OnInit {
       res.results.forEach((element: any) => {
         this._pokemonService.getPokemonById(element.url)
           .pipe(map((el: any) => {
-            console.log(el)
             return {
               name: el.name,
               weight: el.weight,
@@ -37,30 +36,28 @@ export class ListComponent implements OnInit {
           })
       })
     })
-
-    this.filterByType()
-  }
-
-  filterByType() {
     this._pokemonService.$pokemonList.subscribe(datos => {
       this.data = datos
     })
+    this.filterByType()
 
+  }
+
+  filterByType() {
     this._pokemonService.$pokemonType.subscribe(type => {
       if (type === 'Selecciona un tipo') {
         this.data = this.allData;
         return
       }
-      if (this.allData) {
-        this.data = this.allData.filter(pokemon => {
-          return pokemon.type.includes(type)
-        })
-      }
+
+      this.data = this.allData.filter(pokemon => {
+        return pokemon.type.includes(type)
+      })
+      this._pokemonService.setAllPokemons(this.data)
     })
   }
 
   viewDetail(name: any) {
-    console.log(name)
     this._pokemonService.getPokemonByName(name).subscribe(res => {
       console.log(res)
     })

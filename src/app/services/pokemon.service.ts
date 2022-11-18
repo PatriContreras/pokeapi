@@ -24,7 +24,6 @@ export class PokemonService {
     return this.httpClient.get(url)
   }
   getPokemonByName(name: string) {
-    console.log('name', `${this.pokemonUrl}/${name}`)
     return this.httpClient.get(`${this.pokemonUrl}/${name}`)
   }
   getTypes() {
@@ -45,7 +44,6 @@ export class PokemonService {
   }
 
   setData(newPokemon: any) {
-    console.log(newPokemon)
     this.allPokemon.unshift(newPokemon)
     this.setAllPokemons(this.allPokemon)
   }

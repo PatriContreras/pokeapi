@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -11,8 +11,8 @@ export class NewFormComponent implements OnInit {
   types: any[] = []
 
   public pokemonForm = new FormGroup({
-    name: new FormControl(''),
-    weight: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    weight: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
     type: new FormControl('')
   });
 
@@ -27,12 +27,19 @@ export class NewFormComponent implements OnInit {
 
   }
 
+  get name() { return this.pokemonForm.get('name'); }
+  get weight() { return this.pokemonForm.get('weight'); }
+
+
   onSubmit() {
+    if (this.pokemonForm.invalid) {
+      return;
+    }
     this._pokemonService.setData(this.pokemonForm.value)
+    this.pokemonForm.reset();
   }
 
   onChange($event: any) {
-    console.log($event.target.value)
     this._pokemonService.setType($event.target.value)
   }
 }
