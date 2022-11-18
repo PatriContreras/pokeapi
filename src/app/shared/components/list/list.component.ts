@@ -56,8 +56,6 @@ export class ListComponent implements OnInit {
           return pokemon.type.includes(type)
         })
       }
-
-
     })
   }
 
