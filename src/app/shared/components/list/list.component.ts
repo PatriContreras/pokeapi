@@ -14,34 +14,57 @@ export class ListComponent implements OnInit {
   constructor(private _pokemonService: PokemonService) { }
 
   ngOnInit(): void {
+
     this._pokemonService.getAll().subscribe((res: any) => {
-      // console.log(res)
       res.results.forEach((element: any) => {
         this._pokemonService.getPokemonById(element.url)
           .pipe(map((el: any) => {
+            console.log(el)
             return {
               name: el.name,
               weight: el.weight,
-              type: [...el.types.map((type: any) => { return type.type.name })]
+              height: el.height,
+              type: [...el.types.map((type: any) => { return type.type.name })],
+              abilities: [...el.abilities.map((ability: any) => { return ability.ability.name })],
+
             }
           }))
-          .subscribe((data: any) => {
-            this.data.push(data)
-            this.allData = JSON.parse(JSON.stringify(this.data))
+          .subscribe((a: any) => {
+            this.data.push(a)
+            this.allData = [...this.data]
             this._pokemonService.setAllPokemons(this.data)
 
           })
       })
-      this.filterByType()
     })
 
+    this.filterByType()
   }
 
   filterByType() {
-    this._pokemonService.$pokemonType.subscribe(type => {
-      console.log(this.data)
-      this.data = this.data.filter(pokemon => pokemon.type === type)
+    this._pokemonService.$pokemonList.subscribe(datos => {
+      this.data = datos
+    })
 
+    this._pokemonService.$pokemonType.subscribe(type => {
+      if (type === 'Selecciona un tipo') {
+        this.data = this.allData;
+        return
+      }
+      if (this.allData) {
+        this.data = this.allData.filter(pokemon => {
+          return pokemon.type.includes(type)
+        })
+      }
+
+
+    })
+  }
+
+  viewDetail(name: any) {
+    console.log(name)
+    this._pokemonService.getPokemonByName(name).subscribe(res => {
+      console.log(res)
     })
   }
 }

@@ -23,6 +23,10 @@ export class PokemonService {
   getPokemonById(url: string) {
     return this.httpClient.get(url)
   }
+  getPokemonByName(name: string) {
+    console.log('name', `${this.pokemonUrl}/${name}`)
+    return this.httpClient.get(`${this.pokemonUrl}/${name}`)
+  }
   getTypes() {
     return this.httpClient.get(this.typeUrl)
   }
@@ -33,11 +37,17 @@ export class PokemonService {
 
   setAllPokemons(list: any): void {
     this.allPokemon = list
-    this.$pokemonList.next(list);
+    this.$pokemonList.next(this.allPokemon);
+  }
+
+  getAllPokemon() {
+    return this.allPokemon;
   }
 
   setData(newPokemon: any) {
+    console.log(newPokemon)
     this.allPokemon.unshift(newPokemon)
+    this.setAllPokemons(this.allPokemon)
   }
   setType(type: string): void {
     this.$pokemonType.next(type);

@@ -11,9 +11,9 @@ export class TableComponent implements OnInit {
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
-    this.pokemonService.getAll().subscribe(res => {
-      console.log(res)
-    })
+    // this.pokemonService.getAll().subscribe(res => {
+    //   console.log(res)
+    // })
   }
 
 }

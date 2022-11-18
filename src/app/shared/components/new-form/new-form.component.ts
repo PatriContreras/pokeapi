@@ -32,7 +32,7 @@ export class NewFormComponent implements OnInit {
   }
 
   onChange($event: any) {
-    console.log($event)
+    console.log($event.target.value)
     this._pokemonService.setType($event.target.value)
   }
 }
